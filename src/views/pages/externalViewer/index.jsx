@@ -25,12 +25,14 @@ import { GET_SHOW } from '../../../utils/graphql/viewer/queries';
 import { showAlert } from '../globalPageHelpers';
 import { defaultProcessingInstructions, processingInstructions, viewerPageMessageElements } from './helpers/helpers';
 
+const env = window._env_ || {};
+
 const ExternalViewerPage = () => {
   const dispatch = useDispatch();
 
   const blockRedirectReferrers = ['https://player.pulsemesh.io/'];
-  const baseGithubPath = import.meta.env.VITE_GITHUB_JS_PATH || 'https://raw.githubusercontent.com/Remote-Falcon/remote-falcon-viewer-page-js/refs/heads/main/';
-  const baseCdnPath = import.meta.env.VITE_CDN_JS_PATH || 'https://cdn.jsdelivr.net/gh/Remote-Falcon/remote-falcon-viewer-page-js@main/';
+  const baseGithubPath = env.VITE_GITHUB_JS_PATH || 'https://raw.githubusercontent.com/Remote-Falcon/remote-falcon-viewer-page-js/refs/heads/main/';
+  const baseCdnPath = env.VITE_CDN_JS_PATH || 'https://cdn.jsdelivr.net/gh/Remote-Falcon/remote-falcon-viewer-page-js@main/';
 
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState();

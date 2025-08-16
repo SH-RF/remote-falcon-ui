@@ -27,6 +27,8 @@ import { strengthColor, strengthIndicatorNumFunc } from '../../../../utils/passw
 
 import { Environments } from '../../../../utils/enum';
 
+const env = window._env_ || {};
+
 const AuthRegister = () => {
   const theme = useTheme();
 
@@ -205,7 +207,7 @@ const AuthRegister = () => {
                   <Button
                     id="signup-submit"
                     disableElevation
-                    disabled={isSubmitting || import.meta.env.VITE_HOST_ENV === Environments.TEST}
+                    disabled={isSubmitting || env.VITE_HOST_ENV === Environments.TEST}
                     fullWidth
                     size="large"
                     type="submit"

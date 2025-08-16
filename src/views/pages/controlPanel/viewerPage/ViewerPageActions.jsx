@@ -22,6 +22,8 @@ import CreateViewerPageModal from './CreateViewerPage.modal';
 import ManageViewerPagesModal from './ManageViewerPages.modal';
 import ViewerPagePreviewDialog from './ViewerPagePreview.dialog';
 
+const env = window._env_ || {};
+
 const ViewerPageActions = ({
   activeViewerPageHtml,
   activeViewerPageName,
@@ -79,7 +81,7 @@ const ViewerPageActions = ({
       icon: <AddTwoToneIcon sx={{ color: theme.palette.grey[700] }} fontSize="medium" />,
       name: 'New Viewer Page',
       action: () => setCreateViewerPageOpen(true),
-      enabled: show?.pages?.length < 5 || import.meta.env.VITE_HOST_ENV === Environments.LOCAL
+      enabled: show?.pages?.length < 5 || env.VITE_HOST_ENV === Environments.LOCAL
     },
     {
       icon: <SaveTwoToneIcon sx={{ color: theme.palette.grey[700] }} fontSize="medium" />,

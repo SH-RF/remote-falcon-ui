@@ -28,6 +28,8 @@ import Transitions from '../../../../ui-component/extended/Transitions';
 
 import { Environments } from '../../../../utils/enum';
 
+const env = window._env_ || {};
+
 const ProfileSection = () => {
   const theme = useTheme();
   const { borderRadius } = useConfig();
@@ -69,11 +71,11 @@ const ProfileSection = () => {
 
   const prevOpen = useRef(open);
   useEffect(() => {
-    const swapCP = import.meta.env.VITE_SWAP_CP === 'true';
+    const swapCP = env.VITE_SWAP_CP === 'true';
     let showUrl = `https://${show?.showSubdomain}.remotefalcon.com`;
-    if (import.meta.env.VITE_HOST_ENV === Environments.LOCAL) {
+    if (env.VITE_HOST_ENV === Environments.LOCAL) {
       showUrl = swapCP ? 'http://localhost:5173' : `http://${show?.showSubdomain}.localhost:5173`;
-    } else if (import.meta.env.VITE_HOST_ENV === Environments.TEST) {
+    } else if (env.VITE_HOST_ENV === Environments.TEST) {
       showUrl = `https://${show?.showSubdomain}.remotefalcon.dev`;
     }
     setShowNameUrl(showUrl);

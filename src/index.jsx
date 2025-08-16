@@ -19,8 +19,10 @@ import { store } from './store';
 import './assets/scss/style.scss';
 import { Environments } from './utils/enum';
 
-if (import.meta.env.VITE_MIXPANEL_KEY) {
-  mixpanel.init(import.meta.env.VITE_MIXPANEL_KEY);
+const env = window._env_ || {};
+
+if (env.VITE_MIXPANEL_KEY) {
+  mixpanel.init(env.VITE_MIXPANEL_KEY);
 } else {
   mixpanel.init('*');
   mixpanel.disable();
@@ -33,8 +35,8 @@ const posthogOptions = {
 const link = ApolloLink.from([
   new MultiAPILink({
     endpoints: {
-      controlPanel: import.meta.env.VITE_CONTROL_PANEL_API,
-      viewer: import.meta.env.VITE_VIEWER_API
+      controlPanel: env.VITE_CONTROL_PANEL_API,
+      viewer: env.VITE_VIEWER_API
     },
     createHttpLink: () => createHttpLink()
   })
@@ -46,7 +48,7 @@ const client = new ApolloClient({
   }),
   // defaultOptions,
   link,
-  connectToDevTools: import.meta.env.VITE_HOST_ENV === Environments.LOCAL
+  connectToDevTools: env.VITE_HOST_ENV === Environments.LOCAL
 });
 
 // eslint-disable-next-line import/prefer-default-export
@@ -75,7 +77,7 @@ root.render(
     <ConfigProvider>
       <BrowserRouter basename={BASE_PATH}>
         <ApolloProvider client={client}>
-          <PostHogProvider apiKey={import.meta.env.VITE_PUBLIC_POSTHOG_KEY} options={posthogOptions}>
+          <PostHogProvider apiKey={env.VITE_PUBLIC_POSTHOG_KEY} options={posthogOptions}>
             <App />
           </PostHogProvider>
         </ApolloProvider>

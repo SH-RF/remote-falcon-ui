@@ -5,6 +5,8 @@ import moment from 'moment-timezone';
 import axios from '../../../../utils/axios';
 import { showAlertOld } from '../../../../views/pages/globalPageHelpers';
 
+const env = window._env_ || {};
+
 export const uniqueViewersByDate = (dashboardStats) => {
   const data = [];
   _.map(dashboardStats?.page, (viewerPageVisit) => {
@@ -128,7 +130,7 @@ export const sequenceVoteWins = (dashboardStats) => {
 
 const downloadStatsToExcelService = async (timezone, dateFilterStart, dateFilterEnd) => {
   const response = await axios.post(
-    `${import.meta.env.VITE_CONTROL_PANEL_API}/controlPanel/downloadStatsToExcel`,
+    `${env.VITE_CONTROL_PANEL_API}/controlPanel/downloadStatsToExcel`,
     {
       timezone,
       dateFilterStart,

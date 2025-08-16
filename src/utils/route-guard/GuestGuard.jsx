@@ -8,6 +8,8 @@ import useAuth from '../../hooks/useAuth';
 
 import {isExternalViewer, isSubdomainCP} from './helpers/helpers';
 
+const env = window._env_ || {};
+
 /**
  * Guest guard for routes having no auth required
  * @param {PropTypes.node} children children element/node
@@ -24,7 +26,7 @@ const GuestGuard = ({ children }) => {
       navigate('/remote-falcon', { replace: true });
       return;
     }
-    const swapCP = import.meta.env.VITE_SWAP_CP === 'true';
+    const swapCP = env.VITE_SWAP_CP === 'true';
     if(swapCP && !isSubdomainCP()) {
       console.log("Should be 404");
       navigate('/404', { replace: true });

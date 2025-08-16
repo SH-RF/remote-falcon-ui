@@ -19,6 +19,8 @@ import { SHOWS_ON_MAP } from '../../../../utils/graphql/controlPanel/queries';
 import { showAlert } from '../../globalPageHelpers';
 import MarkerWithInfo from './MarkerWithInfo';
 
+const env = window._env_ || {};
+
 const ShowsMap = () => {
   const dispatch = useDispatch();
   const { show } = useSelector((state) => state.show);
@@ -220,7 +222,7 @@ const ShowsMap = () => {
                   </Typography>
                 </Box>
                 <CardActions sx={{ height: '39em' }}>
-                  <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_KEY} onLoad={() => setMapLoaded(true)}>
+                  <APIProvider apiKey={env.VITE_GOOGLE_MAPS_KEY} onLoad={() => setMapLoaded(true)}>
                     {mapLoaded && (
                       <Map mapId="972618e58193992a" defaultZoom={1} defaultCenter={center}>
                         {_.map(showsOnMap, (show) => (
